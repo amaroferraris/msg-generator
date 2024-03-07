@@ -5,10 +5,7 @@ const btnBorrar = document.getElementById('btn-borrar');
 const total = document.getElementById('total');
 const output = document.getElementById('output');
 
-// Idea para evitar id duplicados, usar un número que
-// aumente cada vez que se clickea el botón GENERAR
-// y se reinicie a 1 cuando se clickee el botón BORRAR-TODO
-const idCounter = 1
+let idCounter = 1
 
 // BOTÓN GENERAR
 btnGenerar.addEventListener('click', (e) => {
@@ -18,7 +15,7 @@ btnGenerar.addEventListener('click', (e) => {
     const inputNombre = inputNombreElement.value;
 
     if (inputPrecio && inputNombre) {
-        const message = generateMessage(inputNombre, inputPrecio);
+        const message = generateMessage(inputNombre, inputPrecio, idCounter);
 
         total.textContent = parseInt(total.textContent) + parseInt(inputPrecio);
 
@@ -30,18 +27,18 @@ btnGenerar.addEventListener('click', (e) => {
 
 
 // FUNCIÓN MENSAJE
-function generateMessage(nombre, precio) {
+function generateMessage(nombre, precio, id) {
     const message = `
         <div class="output-container">
             <br>
             <h3>${nombre.toUpperCase()}</h3>
-<p class="texto" id="p-${nombre}">Hola ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}! Cómo estás?
+<p class="texto" id="p-${id}">Hola ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}! Cómo estás?
 <br><br>
 Este mensaje es para recordarte que iniciamos un mes nuevo, y la cuota se debe abonar *entre el 1 y el 10*. El valor de este mes es de *$ ${precio}*.
 <br><br>
 Gracias! Cualquier consulta estoy a tu disposición 🤓</p>
             <div class="div-copiar tooltip">
-                <button class="btn-copiar" id="btn-${nombre}" data-message-id="p-${nombre}">
+                <button class="btn-copiar" id="btn-${id}" data-message-id="p-${id}">
                     <span class="tooltiptext" id="myTooltip">Copiado!</span>
                     COPIAR MENSAJE
                 </button>
@@ -51,6 +48,8 @@ Gracias! Cualquier consulta estoy a tu disposición 🤓</p>
 
     output.innerHTML += message;
 
+    idCounter++
+
     return;
 }
 
@@ -58,10 +57,9 @@ Gracias! Cualquier consulta estoy a tu disposición 🤓</p>
 //
 //
 // MENSAJE ID ?
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     if (event.target.classList.contains('btn-copiar')) {
         const messageId = event.target.getAttribute('data-message-id');
-        console.log(messageId)
         copyMessageToClipboard(messageId);
     }
 });
@@ -96,4 +94,6 @@ btnBorrar.addEventListener('click', (e) => {
     inputPrecioElement.value = '';
     total.textContent = '0';
     output.innerHTML = '';
+
+    idCounter = 1;
 });
