@@ -7,6 +7,13 @@ const output = document.getElementById('output');
 
 let idCounter = 1
 
+// PRECIO MAYOR o IGUAL A 0
+inputPrecioElement.addEventListener('input', function() {
+    if (inputPrecioElement.value < 0) {
+        inputPrecioElement.value = 0;
+    }
+});
+
 // BOTÓN GENERAR
 btnGenerar.addEventListener('click', (e) => {
     e.preventDefault();
@@ -24,7 +31,6 @@ btnGenerar.addEventListener('click', (e) => {
         alert('Hay datos sin completar, che papuda.');
     }
 });
-
 
 // FUNCIÓN MENSAJE
 function generateMessage(nombre, precio, id) {
@@ -53,20 +59,13 @@ Gracias! Cualquier consulta estoy a tu disposición 🤓</p>
     return;
 }
 
-
-//
-//
-// MENSAJE ID ?
+// MENSAJE ID
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('btn-copiar')) {
         const messageId = event.target.getAttribute('data-message-id');
         copyMessageToClipboard(messageId);
     }
 });
-// 
-// 
-// 
-
 
 // FUNCIÓN COPIAR
 function copyMessageToClipboard(elementId) {
@@ -78,7 +77,7 @@ function copyMessageToClipboard(elementId) {
             const copyButton = document.querySelector(`#${elementId.replace('p-', 'btn-')}`);
             copyButton.querySelector('.tooltiptext').textContent = 'Copiado!';
             setTimeout(() => {
-                copyButton.querySelector('.tooltiptext').textContent = 'COPIAR MENSAJE';
+                copyButton.querySelector('.tooltiptext').textContent = 'COPIAR';
             }, 1500);
         })
         .catch(err => {

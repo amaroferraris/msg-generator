@@ -140,7 +140,7 @@ div.div-copiar {
 }
 
 
-.tooltip .tooltiptext::after {
+.tooltip .tooltiptext {
     content: "";
     position: absolute;
     top: 100%;
