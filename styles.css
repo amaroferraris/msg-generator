@@ -38,27 +38,36 @@ form {
 
 
 input {
+    font-size: .75rem;
     padding: 1rem;
     margin: 1rem;
     border-radius: .5rem;
+    width: 4rem;
 }
 
 
 input.precio,
+input.clases,
+input.casa {
+    background-color: rgb(255, 230, 230);
+}
+
 input.mes,
 input.dia {
-    width: 5rem;
-    background-color: rgb(230, 200, 200);
+    width: 4rem;
 }
 
-
-input.nombre {
-    border-radius: .5rem;
-    width: 5rem;
+input.clases {
+    width: 4rem;
 }
 
+input.casa {
+    display: none;
+    width: 3rem;
+}
 
 input.btn-generar {
+    width: 6rem;
     color: whitesmoke;
     background-color: #ABB557;
     border-radius: 1rem;
@@ -66,6 +75,7 @@ input.btn-generar {
 
 
 input.btn-borrar {
+    width: 8rem;
     color: rgb(245, 245, 245);
     background-color: rgb(220, 50, 50);
     border-radius: 1rem;
@@ -84,6 +94,7 @@ div.total-container {
 
 .output {
     align-items: end;
+    width: 30rem;
     padding: 1rem;
     color: rgb(175, 175, 175);
     margin-top: 3.75rem;
