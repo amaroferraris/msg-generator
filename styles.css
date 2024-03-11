@@ -62,8 +62,23 @@ input.clases {
 }
 
 input.casa {
-    display: none;
+    display: inline;
     width: 3rem;
+    background-color: rgb(200, 255, 255);
+}
+
+input.precio-casa,
+input.casa {
+    display: none;
+    width: 7rem;
+    background-color: rgb(200, 255, 255);
+}
+
+input.btn-generar-maca {
+    display: none;
+    width: 6rem;
+    color: whitesmoke;
+    background-color: #ABB557;
 }
 
 input.btn-generar {
