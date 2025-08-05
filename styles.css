@@ -63,14 +63,14 @@ input.clases {
 
 input.casa {
     display: inline;
-    width: 3rem;
+    width: 2rem;
     background-color: rgb(200, 255, 255);
 }
 
 input.precio-casa,
 input.casa {
     display: none;
-    width: 7rem;
+    width: 4rem;
     background-color: rgb(200, 255, 255);
 }
 
@@ -153,4 +153,10 @@ div.div-copiar {
     border-radius: .5rem;
     background-color: rgba(200, 230, 200, 0.8);
     box-shadow: 0 0 1px 1px rgb(200, 230, 200);
+}
+
+button {
+    width: 10rem;
+    height: 3rem;
+    border-radius: 0.5rem;
 }
