@@ -1,15 +1,12 @@
 const inputMesElement = document.getElementById("mes");
 const inputDiaElement = document.getElementById("dia");
 const inputNombreElement = document.getElementById("nombre");
-
 const inputPrecioElement = document.getElementById("precio");
-const inputPrecioCasaElement = document.getElementById("precio-casa");
-
 const inputClasesElement = document.getElementById("clases");
-const inputCasaElement = document.getElementById("casa");
+const inputAumentoElement = document.getElementById("aumento");
 
 const btnGenerar = document.getElementById("btn-generar");
-const btnGenerarMaca = document.getElementById("btn-generar-maca");
+const btnAumento = document.getElementById("btn-aumento");
 const btnBorrar = document.getElementById("btn-borrar");
 
 const total = document.getElementById("total");
@@ -26,6 +23,28 @@ inputPrecioElement.addEventListener("input", function () {
   }
 });
 
+// FECHA
+const date = new Date()
+const dias = {'lunes' : 1,
+	'martes' : 2,
+	'miércoles': 3,
+	'jueves': 4,
+	'viernes': 5
+}
+const meses = {0 : 'enero',
+	1 : 'febrero',
+	2 : 'marzo',
+	3 : 'abril',
+	4 : 'mayo',
+	5 : 'junio',
+	6 : 'julio',
+	7 : 'agosto',
+	8 : 'septiembre',
+	9 : 'octubre',
+	10 : 'noviembre',
+	11 : 'diciembre',
+}
+
 // BOTÓN GENERAR
 btnGenerar.addEventListener("click", (e) => {
   e.preventDefault();
@@ -38,7 +57,6 @@ btnGenerar.addEventListener("click", (e) => {
   const inputClases = inputClasesElement.value;
 
   if (inputMes && inputDia && inputNombre && inputPrecio && inputClases) {
-    // if (inputNombre !== "Maca") {
 
     const message = generateMessage(
       inputMes,
@@ -54,48 +72,34 @@ btnGenerar.addEventListener("click", (e) => {
 
     inputNombreElement.value = "";
 
-    // } else {
-
-    //     inputCasaElement.style.display = 'inline';
-    //     inputPrecioCasaElement.style.display = 'inline';
-    //     btnGenerar.style.display = 'none';
-    //     btnGenerarMaca.style.display = 'inline';
-
-    //     btnGenerarMaca.addEventListener('click', (e) => {
-
-    //         e.preventDefault();
-
-    //         const inputPrecioCasa = inputPrecioCasaElement.value;
-    //         const inputCasa = inputCasaElement.value;
-
-    //         const message = generateMessageMaca(inputMes, inputDia, inputPrecio, inputNombre, inputClases, inputPrecioCasa, inputCasa, idCounter);
-
-    //         total.textContent = parseInt(total.textContent) + (parseInt(inputPrecio) * parseInt(inputClases) + (parseInt(inputPrecioCasa) * parseInt(inputCasa)));
-
-    //         inputNombreElement.value = '';
-    //         inputClasesElement.value = '';
-    //         inputCasaElement.style.display = 'none';
-    //         inputPrecioCasaElement.style.display = 'none';
-    //         btnGenerarMaca.style.display = 'none';
-    //         btnGenerar.style.display = 'inline';
-
-    //     })
   }
-  // }
 });
 
 // FUNCIÓN MENSAJE
 function generateMessage(mes, dia, precio, nombre, clases, id) {
+
+  // DIA
+  const saludo = date.getHours() < 12 ? "Buen día" : "Buenas tardes";
+  const hoy = date.getDay()
+  let despedida;
+  if (hoy == dias[dia]) {
+	despedida = "más tarde"
+    } else if (hoy + 1 == dias[dia]) {
+	despedida = "mañana" 
+    } else {
+	despedida = `el ${dia}`
+    }
+
   const message = `
         <div class="output-container">
         <br>
         <h3>${nombre.toUpperCase()}</h3>
-<p class="texto" id="p-${id}">Buen día ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}, ¿cómo estás?
+<p class="texto" id="p-${id}">${saludo} ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}, ¿cómo estás?
 <br><br>
 Te paso el plan de las clases de ${mes}:<br>
 Son *${clases} ${dia}*, serían *$ ${parseInt(precio) * parseInt(clases)}* ($ ${precio} x ${clases}).
 <br><br>
-Cualquier cosa avisame, ¡nos vemos el ${dia}!</p>
+Cualquier cosa avisame, ¡nos vemos ${despedida}!</p>
             <div class="div-copiar">
 
                 <svg class="btn-copiar" id="btn-${id}" data-message-id="p-${id}" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="54"><path class="btn-copiar" id="btn-${id}" data-message-id="p-${id}" d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>
@@ -108,36 +112,72 @@ Cualquier cosa avisame, ¡nos vemos el ${dia}!</p>
   return;
 }
 
-function generateMessageMaca(
-  mes,
-  dia,
-  precio,
-  nombre,
-  clases,
-  preciocasa,
-  casa,
-  id,
-) {
+// BOTÓN AUMENTO
+btnAumento.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  // VALUES
+  const inputMes = inputMesElement.value;
+  const inputDia = inputDiaElement.value;
+  const inputNombre = inputNombreElement.value;
+  const inputPrecio = inputPrecioElement.value;
+  const inputClases = inputClasesElement.value;
+  const inputAumento = inputAumentoElement.value;
+
+  if (inputMes && inputDia && inputNombre && inputPrecio && inputClases && inputAumento) {
+
+    const message = generateAumento(
+      inputMes,
+      inputDia,
+      inputPrecio,
+      inputNombre,
+      inputClases,
+      inputAumento,
+      idCounter,
+    );
+    total.textContent =
+      parseInt(total.textContent) +
+      parseInt(inputPrecio) * parseInt(inputClases);
+
+    inputNombreElement.value = "";
+    inputAumentoElement.value = "";
+  } 
+});
+
+// FUNCIÓN AUMENTO
+function generateAumento(mes, dia, precio, nombre, clases, aumento, id) {
+
+  // DIA
+  const saludo = date.getHours() < 12 ? "Buen día" : "Buenas tardes";
+  const hoy = date.getDay()
+  let despedida;
+  if (hoy == dias[dia]) {
+	despedida = "más tarde"
+    } else if (hoy + 1 == dias[dia]) {
+	despedida = "mañana" 
+    } else {
+	despedida = `el ${dia}`
+    }
+
   const message = `
-    <div class="output-container">
-    <br>
-    <h3>${nombre.toUpperCase()}</h3>
-<p class="texto" id="p-${id}">Buen día ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}, ¿cómo estás?
+        <div class="output-container">
+        <br>
+        <h3>${nombre.toUpperCase()}</h3>
+<p class="texto" id="p-${id}">${saludo} ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}, ¿cómo estás?
 <br><br>
 Te paso el plan de las clases de ${mes}:<br>
-<br>
-Son *${parseInt(clases) + parseInt(casa)} ${dia}*, serían *$ ${parseInt(precio) * parseInt(clases) + parseInt(preciocasa) * parseInt(casa)}*<br>
-- En tu casa: $ ${precio * clases} (${precio} x ${clases})<br>
-- En mi casa: $ ${preciocasa * casa} (${preciocasa} x ${casa})<br>
-<br>
-Cualquier cosa avisame, ¡nos vemos el ${dia}!</p>
-    <div class="div-copiar">
+Son *${clases} ${dia}*, serían *$ ${parseInt(precio) * parseInt(clases)}* ($ ${precio} x ${clases}).
+<br><br>
+:horn A partir del mes de ${meses[date.getMonth()+1]} el valor de cada clase será de $${aumento}
+<br><br>
+Cualquier cosa avisame, ¡nos vemos ${despedida}!</p>
+            <div class="div-copiar">
 
-        <svg class="btn-copiar" id="btn-${id}" data-message-id="p-${id}" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="54"><path class="btn-copiar" id="btn-${id}" data-message-id="p-${id}" d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>
+                <svg class="btn-copiar" id="btn-${id}" data-message-id="p-${id}" xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="54"><path class="btn-copiar" id="btn-${id}" data-message-id="p-${id}" d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>
 
-    </div><br>
-</div>
-`;
+            </div><br>
+        </div>
+    `;
   output.innerHTML += message;
   idCounter++;
   return;
@@ -183,12 +223,8 @@ btnBorrar.addEventListener("click", (e) => {
   inputNombreElement.value = "";
   inputPrecioElement.value = "";
   inputClasesElement.value = "";
+  inputAumentoElement.value = "";
 
-  inputPrecioCasaElement.value = "";
-  inputCasaElement.value = "";
-
-  inputCasaElement.style.display = "none";
-  inputPrecioCasaElement.style.display = "none";
 
   total.textContent = "0";
   output.innerHTML = "";
