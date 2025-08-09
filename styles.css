@@ -30,8 +30,6 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid #000; */
-    /* background-color: #2D4739; */
     background: linear-gradient(to top, rgba(45, 71, 57, 0.05) .5%, rgb(45, 71, 57) 20%, rgb(45, 71, 57));
     z-index: 2;
 }
@@ -44,7 +42,6 @@ input {
     border-radius: .5rem;
     width: 4rem;
 }
-
 
 input.precio,
 input.clases,
@@ -75,12 +72,12 @@ input.btn-aumento {
     border-radius: 1rem; 
 } 
 
-input.btn-borrar { width: 8rem;
+input.btn-borrar { 
+    width: 8rem;
     color: rgb(245, 245, 245);
     background-color: rgb(220, 50, 50);
     border-radius: 1rem;
 }
-
 
 div.total-container {
     display: flex;

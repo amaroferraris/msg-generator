@@ -1,4 +1,3 @@
-const inputMesElement = document.getElementById("mes");
 const inputDiaElement = document.getElementById("dia");
 const inputNombreElement = document.getElementById("nombre");
 const inputPrecioElement = document.getElementById("precio");
@@ -11,7 +10,6 @@ const btnBorrar = document.getElementById("btn-borrar");
 
 const total = document.getElementById("total");
 const output = document.getElementById("output");
-const txtBtn = document.getElementById("txt");
 
 // ID
 let idCounter = 1;
@@ -50,16 +48,14 @@ btnGenerar.addEventListener("click", (e) => {
   e.preventDefault();
 
   // VALUES
-  const inputMes = inputMesElement.value;
   const inputDia = inputDiaElement.value;
   const inputNombre = inputNombreElement.value;
   const inputPrecio = inputPrecioElement.value;
   const inputClases = inputClasesElement.value;
 
-  if (inputMes && inputDia && inputNombre && inputPrecio && inputClases) {
+  if (inputDia && inputNombre && inputPrecio && inputClases) {
 
     const message = generateMessage(
-      inputMes,
       inputDia,
       inputPrecio,
       inputNombre,
@@ -76,7 +72,7 @@ btnGenerar.addEventListener("click", (e) => {
 });
 
 // FUNCIÓN MENSAJE
-function generateMessage(mes, dia, precio, nombre, clases, id) {
+function generateMessage(dia, precio, nombre, clases, id) {
 
   // DIA
   const saludo = date.getHours() < 12 ? "Buen día" : "Buenas tardes";
@@ -96,7 +92,7 @@ function generateMessage(mes, dia, precio, nombre, clases, id) {
         <h3>${nombre.toUpperCase()}</h3>
 <p class="texto" id="p-${id}">${saludo} ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}, ¿cómo estás?
 <br><br>
-Te paso el plan de las clases de ${mes}:<br>
+Te paso el plan de las clases de ${meses[date.getMonth()]}:<br>
 Son *${clases} ${dia}*, serían *$ ${parseInt(precio) * parseInt(clases)}* ($ ${precio} x ${clases}).
 <br><br>
 Cualquier cosa avisame, ¡nos vemos ${despedida}!</p>
@@ -117,17 +113,15 @@ btnAumento.addEventListener("click", (e) => {
   e.preventDefault();
 
   // VALUES
-  const inputMes = inputMesElement.value;
   const inputDia = inputDiaElement.value;
   const inputNombre = inputNombreElement.value;
   const inputPrecio = inputPrecioElement.value;
   const inputClases = inputClasesElement.value;
   const inputAumento = inputAumentoElement.value;
 
-  if (inputMes && inputDia && inputNombre && inputPrecio && inputClases && inputAumento) {
+  if (inputDia && inputNombre && inputPrecio && inputClases && inputAumento) {
 
     const message = generateAumento(
-      inputMes,
       inputDia,
       inputPrecio,
       inputNombre,
@@ -145,7 +139,7 @@ btnAumento.addEventListener("click", (e) => {
 });
 
 // FUNCIÓN AUMENTO
-function generateAumento(mes, dia, precio, nombre, clases, aumento, id) {
+function generateAumento(dia, precio, nombre, clases, aumento, id) {
 
   // DIA
   const saludo = date.getHours() < 12 ? "Buen día" : "Buenas tardes";
@@ -165,7 +159,7 @@ function generateAumento(mes, dia, precio, nombre, clases, aumento, id) {
         <h3>${nombre.toUpperCase()}</h3>
 <p class="texto" id="p-${id}">${saludo} ${nombre.charAt(0).toUpperCase()}${nombre.slice(1).toLowerCase()}, ¿cómo estás?
 <br><br>
-Te paso el plan de las clases de ${mes}:<br>
+Te paso el plan de las clases de ${meses[date.getMonth()]}:<br>
 Son *${clases} ${dia}*, serían *$ ${parseInt(precio) * parseInt(clases)}* ($ ${precio} x ${clases}).
 <br><br>
 :horn A partir del mes de ${meses[date.getMonth()+1]} el valor de cada clase será de $${aumento}
@@ -218,25 +212,14 @@ function copyMessageToClipboard(elementId) {
 btnBorrar.addEventListener("click", (e) => {
   e.preventDefault();
 
-  inputMesElement.value = "";
   inputDiaElement.value = "";
   inputNombreElement.value = "";
   inputPrecioElement.value = "";
   inputClasesElement.value = "";
   inputAumentoElement.value = "";
 
-
   total.textContent = "0";
   output.innerHTML = "";
 
   idCounter = 1;
 });
-
-// BOTÓN TXT
-txtBtn.addEventListener("click", () => {
-  console.log(output.textContent);
-
-  navigator.clipboard.writeText(output.textContent);
-  //
-});
-
