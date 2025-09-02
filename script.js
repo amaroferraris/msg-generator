@@ -50,7 +50,7 @@ btnGenerar.addEventListener("click", (e) => {
   // VALUES
   const inputDia = inputDiaElement.value;
   const inputNombre = inputNombreElement.value;
-  const inputPrecio = inputPrecioElement.value;
+  const inputPrecio = inputPrecioElement.value * 1000;
   const inputClases = inputClasesElement.value;
 
   if (inputDia && inputNombre && inputPrecio && inputClases) {
@@ -112,12 +112,6 @@ Cualquier cosa avisame, ¡nos vemos ${despedida}!</p>
 btnAumento.addEventListener("click", (e) => {
   e.preventDefault();
 
-  // VALUES
-  const inputDia = inputDiaElement.value;
-  const inputNombre = inputNombreElement.value;
-  const inputPrecio = inputPrecioElement.value;
-  const inputClases = inputClasesElement.value;
-  const inputAumento = inputAumentoElement.value;
 
   if (inputDia && inputNombre && inputPrecio && inputClases && inputAumento) {
 
