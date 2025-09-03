@@ -112,6 +112,12 @@ Cualquier cosa avisame, ¡nos vemos ${despedida}!</p>
 btnAumento.addEventListener("click", (e) => {
   e.preventDefault();
 
+  // VALUES
+  const inputDia = inputDiaElement.value;
+  const inputNombre = inputNombreElement.value;
+  const inputPrecio = inputPrecioElement.value * 1000;
+  const inputClases = inputClasesElement.value;
+  const inputAumento = inputAumentoElement.value * 1000;
 
   if (inputDia && inputNombre && inputPrecio && inputClases && inputAumento) {
 
@@ -156,7 +162,7 @@ function generateAumento(dia, precio, nombre, clases, aumento, id) {
 Te paso el plan de las clases de ${meses[date.getMonth()]}:<br>
 Son *${clases} ${dia}*, serían *$ ${parseInt(precio) * parseInt(clases)}* ($ ${precio} x ${clases}).
 <br><br>
-:horn A partir del mes de ${meses[date.getMonth()+1]} el valor de cada clase será de $${aumento}
+:horn A partir del mes de ${meses[date.getMonth()+1]} el valor de cada clase será de $ ${aumento}
 <br><br>
 Cualquier cosa avisame, ¡nos vemos ${despedida}!</p>
             <div class="div-copiar">
