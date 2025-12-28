@@ -142,3 +142,143 @@ button {
     height: 3rem;
     border-radius: 0.5rem;
 }
+
+/* Styles for individual message deletion */
+.output-container {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.message-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message-total {
+  font-weight: bold;
+  color: #ABB557;
+  font-size: 1.1rem;
+  background-color: rgba(171, 181, 87, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.delete-btn {
+  background-color: rgba(220, 50, 50, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: rgb(220, 50, 50);
+  transform: scale(1.1);
+}
+
+/* Adjust the copy button positioning */
+.div-copiar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Make sure the output area has proper spacing */
+.output {
+  width: 100%;
+  max-width: 600px;
+  padding: 1rem;
+  color: rgb(175, 175, 175);
+  margin-top: 100px;
+}
+
+/* Style for the total display in form */
+.total-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: rgb(220, 220, 220);
+  padding: 8px 12px;
+  border: 1px solid rgba(220, 220, 220, 0.3);
+  border-radius: .5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.total-div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#total {
+  font-weight: bold;
+  color: #ABB557;
+  font-size: 1.2rem;
+}
+
+/* Form styling adjustments */
+form {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: linear-gradient(to top, rgba(45, 71, 57, 0.05) .5%, rgb(45, 71, 57) 20%, rgb(45, 71, 57));
+  z-index: 2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .message-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .message-controls {
+    align-self: flex-end;
+  }
+  
+  form {
+    height: auto;
+    padding: 10px;
+  }
+  
+  input {
+    margin: 0.5rem;
+    font-size: 0.7rem;
+    padding: 0.8rem;
+  }
+  
+  .output {
+    margin-top: 150px;
+  }
+}
